@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -35,7 +35,17 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $image_name = "";
+        if($request->file('image')) {
+            $image_name = $request->file('image')->store('images', 'public');
+        }
+
+        Article::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'featured_image' => $image_name
+        ]);
+        return 'Artikel berhasil disimpan';
     }
 
     /**
