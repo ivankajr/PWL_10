@@ -15,7 +15,7 @@ use App\Http\Controllers\ArticleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/articles');
 });
 
 Route::resource('articles',ArticleController::class);
