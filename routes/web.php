@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,12 @@ use App\Http\Controllers\ArticleController;
 */
 
 Route::get('/', function () {
-    return redirect('/articles');
+    return redirect('/welcome');
 });
 
 Route::resource('articles',ArticleController::class);
-Route::get('/articles/cetak_pdf',[ArticleController::class, 'cetak_pdf']);
+Route::get('/articles/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
+Route::get('/mahasiswa/nilai/{nim}', [MahasiswaController::class, 'showKhs'])->name('mahasiswa.showKhs');
+Route::get('/mahasiswa/nilai/{nim}/cetak_khs', [MahasiswaController::class, 'cetak_khs'])->name('mahasiswa.cetakKhs');
+Route::resource('mahasiswa', MahasiswaController::class);
+
