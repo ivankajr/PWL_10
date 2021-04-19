@@ -19,8 +19,8 @@ Route::get('/', function () {
     return redirect('/welcome');
 });
 
-Route::resource('articles',ArticleController::class);
 Route::get('/articles/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
+Route::resource('articles',ArticleController::class);
 Route::get('/mahasiswa/nilai/{nim}', [MahasiswaController::class, 'showKhs'])->name('mahasiswa.showKhs');
 Route::get('/mahasiswa/nilai/{nim}/cetak_khs', [MahasiswaController::class, 'cetak_khs'])->name('mahasiswa.cetakKhs');
 Route::resource('mahasiswa', MahasiswaController::class);

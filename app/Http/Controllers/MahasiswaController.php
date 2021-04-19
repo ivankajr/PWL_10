@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -73,6 +74,7 @@ class MahasiswaController extends Controller
             'no_hp' => 'required',
             'email' => 'required',
             'tanggal_lahir' => 'required',
+            'image' => 'required'
         ]);
         // //fungsi eloquent untuk menambahkan data
         // Mahasiswa::create($request->all());
@@ -80,6 +82,10 @@ class MahasiswaController extends Controller
         // //jika data berhasil ditambahkan, akan kembali ke halaman utama
         // $kelas = Kelas::all(); //mendapatkan data dari tabel kelas
         // return view('mahasiswas.create', ['kelas' => $kelas]);
+        $image_name = "";
+        if($request->file('image')) {
+            $image_name = $request->file('image')->store('images', 'public');
+        }
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
@@ -87,6 +93,7 @@ class MahasiswaController extends Controller
         $mahasiswa->no_hp = $request->get('no_hp');
         $mahasiswa->email = $request->get('email');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
+        $mahasiswa->foto = $image_name;
 
         $kelas = new Kelas;
         $kelas->id = $request->get('kelas_id');
@@ -154,12 +161,19 @@ class MahasiswaController extends Controller
         ]);
 
         $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
+        if($mahasiswa->foto && file_exists('app/public/' . $mahasiswa->foto)) {
+            \Storage::delete('public/' . $mahasiswa->foto);
+        }
+
+        $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');
         $mahasiswa->no_hp = $request->get('no_hp');
         $mahasiswa->email = $request->get('email');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
+        $image_name = $request->file('image')->store('images', 'public');
+        $mahasiswa->foto = $image_name;
         $mahasiswa->save();
 
         $kelas = new Kelas;
