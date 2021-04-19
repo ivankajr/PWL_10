@@ -8,6 +8,8 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
+            <img width="150px" src="{{asset('storage/'.$Mahasiswa->foto)}}" alt="image" 
+                style="display: block; margin-left: auto; margin-right: auto; marginBottom: 10px;">
                 <li class="list-group-item"><b>Nim: </b>{{$Mahasiswa->nim}}</li>
                 <li class="list-group-item"><b>Nama: </b>{{$Mahasiswa->nama}}</li>
                 <li class="list-group-item"><b>E-mail: </b>{{$Mahasiswa->email}}</li>

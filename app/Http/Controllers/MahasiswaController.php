@@ -124,6 +124,12 @@ class MahasiswaController extends Controller
         return view('mahasiswas.detailKhs', compact('mahasiswa'));
         // dd($mahasiswa);
     }
+    public function cetak_khs($nim) 
+    {
+        $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
+        $pdf = PDF::loadview('mahasiswas.printKhs', compact('mahasiswa'));
+        return $pdf->stream();
+    }
 
 
     /**
@@ -165,7 +171,6 @@ class MahasiswaController extends Controller
             \Storage::delete('public/' . $mahasiswa->foto);
         }
 
-        $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->jurusan = $request->get('jurusan');

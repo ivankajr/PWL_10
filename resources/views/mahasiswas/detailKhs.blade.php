@@ -36,6 +36,9 @@
     <td>{{$matakuliah->pivot->nilai}}</td>
 </tr>
 @endforeach
+<div class="text-center">
+    <a href="{{ route('mahasiswa.cetakKhs', $mahasiswa->nim) }}" type="button" class="btn btn-danger mt-3">Cetak KHS</a>
+</div>
 
 </table>
 @endsection

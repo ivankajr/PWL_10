@@ -17,7 +17,7 @@
                 </ul>
             </div>
             @endif
-        <form method="post" action="{{ route('mahasiswa.update', $Mahasiswa->nim) }}" id="myForm">
+        <form method="post" action="{{ route('mahasiswa.update', $Mahasiswa->nim) }}" id="myForm" enctype="multipart/form-data">
         @csrf
         @method('PUT')
             <div class="form-group">
@@ -27,6 +27,11 @@
             <div class="form-group">
                 <label for="nama">Nama</label>
                 <input type="text" name="nama" class="form-control" id="nama" value="{{ $Mahasiswa->nama }}" ariadescribedby="nama" >
+            </div>
+            <div class="form-group">
+                <label for="image">Foto</label>
+                <input type="file" class="form-control" required="required" name="image" value="{{$Mahasiswa->foto}}"></br>
+                <img width="150px" src="{{asset('storage/'.$Mahasiswa->foto)}}">
             </div>
             <div class="form-group">
                 <label for="kelas">Kelas</label>
@@ -45,13 +50,13 @@
                 <input type="no_hp" name="no_hp" class="form-control" id="no_hp" value="{{ $Mahasiswa->no_hp }}" ariadescribedby="no_hp" >
             </div>
             <div class="form-group">
-            <label for="email">email</label>
-            <input type="email" name="email" class="form-control" id="email" aria-describedby="email" >
-        </div>
-        <div class="form-group">
-            <label for="tanggal_lahir">tanggal_lahir</label>
-            <input type="tanggal_lahir" name="tanggal_lahir" class="form-control" id="tanggal_lahir" aria-describedby="tanggal_lahir" >
-        </div>
+                <label for="email">email</label>
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="email" >
+            </div>
+            <div class="form-group">
+                <label for="tanggal_lahir">tanggal_lahir</label>
+                <input type="tanggal_lahir" name="tanggal_lahir" class="form-control" id="tanggal_lahir" aria-describedby="tanggal_lahir" >
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

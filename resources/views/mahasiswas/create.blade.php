@@ -49,6 +49,10 @@
             <label for="tanggal_lahir">tanggal_lahir</label>
             <input type="tanggal_lahir" name="tanggal_lahir" class="form-control" id="tanggal_lahir" aria-describedby="tanggal_lahir" >
         </div>
+        <div class="form-group">
+            <label for="image">Foto: </label>
+            <input type="file" class="form-control" required="required" name="image">
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
