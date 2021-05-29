@@ -16,7 +16,7 @@ use App\Http\Controllers\MahasiswaController;
 */
 
 Route::get('/', function () {
-    return redirect('/welcome');
+    return redirect('/mahasiswa');
 });
 
 Route::get('/articles/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
